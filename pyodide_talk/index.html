@@ -14,6 +14,13 @@
         console.log(pyodide.runPython(`
             import sys
             sys.version
+            for x in range(0, 20):
+                print(x)
+            import js
+            div = js.document.createElement("div")
+            div.innerHTML = "<h1>This element was created from Python</h1>"
+            div.innerHTML = "<h2>Body update 2</h2>"
+            js.document.body.prepend(div)
         `));
         console.log(pyodide.runPython("print(1 + 2)"));
       }

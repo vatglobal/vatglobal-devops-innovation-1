@@ -23,6 +23,7 @@ function without lru_cache is", end - begin)
 
 # Function that computes Fibonacci
 # numbers with lru_cache
+
 @lru_cache(maxsize=128)
 def fib_with_cache(n):
     if n < 2:

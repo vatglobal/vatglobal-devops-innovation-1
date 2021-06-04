@@ -2,12 +2,11 @@ import asyncio
 import time
 
 import requests
+import aiohttp
 
 url = "https://jsonplaceholder.typicode.com/posts"
 pages = 100
 pages_res: list = []
-
-
 
 async def loop_post_pages()-> list:
     asyncio_tasks = []
@@ -19,7 +18,10 @@ async def loop_post_pages()-> list:
 # blocking courotine
 async def get_request(url:str="")->list:
     # Blocking library
-    return requests.get(url).json()
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            resp = await resp.json()
+            return resp
 
 async def asyncio_gather()->list:
     tasks = list(await loop_post_pages())
